@@ -1,9 +1,10 @@
+// ChannelCard.jsx
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constant";
 
-const ChannelCard = ({ channelDetail }) => (
+const ChannelCard = ({ channelDetail, marginTop }) => (
   <Box
     sx={{
       boxShadow: "none",
@@ -12,8 +13,9 @@ const ChannelCard = ({ channelDetail }) => (
       justifyContent: "center",
       alignItems: "center",
       width: { xs: "356px", md: "320px" },
-      height: "326px",
+      height: "326px", // Maintain height for consistent card size
       margin: "auto",
+      marginTop: marginTop, // This will be the negative margin from ChannelDetails
     }}
   >
     <Link to={`/channel/${channelDetail?.id?.channelId}`}>
@@ -26,6 +28,7 @@ const ChannelCard = ({ channelDetail }) => (
           color: "#fff",
         }}
       >
+        {/* CardMedia for the channel's profile picture */}
         <CardMedia
           image={
             channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture
@@ -38,26 +41,28 @@ const ChannelCard = ({ channelDetail }) => (
             mb: 2,
             border: "1px solid #e3e3e3",
           }}
-        >
-          <Typography variant="h6">
-            {channelDetail?.snippet?.title}
-            <CheckCircle
-              sx={{
-                fontSize: 14,
-                color: "gray",
-                ml: "5px",
-              }}
-            ></CheckCircle>
+        />{" "}
+        {/* This is a self-closing tag */}
+        {/* Typography for channel title (moved OUTSIDE CardMedia) */}
+        <Typography variant="h6">
+          {channelDetail?.snippet?.title}
+          <CheckCircle
+            sx={{
+              fontSize: 14,
+              color: "gray",
+              ml: "5px",
+            }}
+          />
+        </Typography>
+        {/* Typography for subscriber count (moved OUTSIDE CardMedia) */}
+        {channelDetail?.statistics?.subscriberCount && (
+          <Typography>
+            {parseInt(
+              channelDetail?.statistics?.subscriberCount
+            ).toLocaleString()}{" "}
+            Subscribers
           </Typography>
-          {channelDetail?.statistics?.subscriberCount && (
-            <Typography>
-              {parseInt(
-                channelDetail?.statistics?.subscriberCount
-              ).toLocaleString()}{" "}
-              Subscribers
-            </Typography>
-          )}
-        </CardMedia>
+        )}
       </CardContent>
     </Link>
   </Box>

@@ -5,6 +5,7 @@ import Feed from "./components/Feed";
 import VideoDetail from "./components/VideoDetail";
 import ChannelDetails from "./components/ChannelDetails";
 import SearchFeed from "./components/SearchFeed";
+import PlaylistDetail from "./components/PlaylistDetail"; // Import the new component
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +16,8 @@ const App = () => (
         <Route path="/video/:id" exact element={<VideoDetail />} />
         <Route path="/channel/:id" exact element={<ChannelDetails />} />
         <Route path="/search/:searchTerm" exact element={<SearchFeed />} />
+        <Route path="/playlist/:id" element={<PlaylistDetail />} />{" "}
+        {/* NEW ROUTE HERE */}
       </Routes>
     </Box>
   </BrowserRouter>

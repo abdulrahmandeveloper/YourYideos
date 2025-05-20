@@ -1,20 +1,39 @@
+// src/components/Feed.jsx
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
+import Video from "./Video"; // This component now handles videos, channels, and playlists
 import { FetchFromAPI } from "../utils/fetchfromAPI";
-import Video from "./Video";
 
 const Feed = () => {
-  const [selectedcategory, setSelectedcategory] = useState("New");
-  const [videos, setVideos] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [items, setItems] = useState([]); // Renamed 'videos' to 'items' to hold mixed types
+
   useEffect(() => {
-    FetchFromAPI(`search?part=snippet&q=${selectedcategory}`).then((data) =>
-      setVideos(data.items)
-    );
-  }, []);
-  console.log(videos);
+    // console.log("Videos in state (outside useEffect):", videos); // Keep for debugging if needed
+
+    const fetchItems = async () => {
+      try {
+        const data = await FetchFromAPI("search", {
+          part: "snippet",
+          q: selectedCategory,
+          // *** Crucial change: search for all types ***
+          type: "video,channel,playlist", // <-- Include 'playlist' here
+          maxResults: "50", // Keep a reasonable limit to manage API quota
+        });
+        setItems(data.items); // Set all fetched items (videos, channels, playlists)
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+        // You might want to set an error state here to display a user-friendly message
+        // setError('Failed to load content. Please try again later.');
+      }
+    };
+
+    fetchItems();
+  }, [selectedCategory]); // Dependency array: re-run useEffect when selectedCategory changes
+
   return (
-    <Stack sx={{ flexDirection: { sm: "column", md: "row" } }}>
+    <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
         sx={{
           height: { sx: "auto", md: "92vh" },
@@ -22,44 +41,33 @@ const Feed = () => {
           px: { sx: 0, md: 2 },
         }}
       >
+        <Sidebar
+          selectedCategory={selectedCategory}
+          // This prop name 'setSelectedCategory' MUST EXACTLY MATCH
+          // how it's destructured and used in the Sidebar component.
+          setSelectedCategory={setSelectedCategory}
+        />
         <Typography
           className="copyright"
           variant="body2"
           sx={{ mt: 1.5, color: "#fff" }}
         >
-          <Sidebar
-            selectedcategory={selectedcategory}
-            setSelectedcategory={setSelectedcategory}
-          ></Sidebar>
-          @Copyright 2025 InfernoGroup
+          Copyright © 2023 JSM Media
         </Typography>
       </Box>
-      <Box
-        p={2}
-        sx={{
-          overflowY: "auto",
-          height: "90vh",
-          flex: 2,
-        }}
-      >
+      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
         <Typography
           variant="h4"
           fontWeight={"bold"}
           mb={2}
-          sx={{
-            color: "white",
-          }}
+          sx={{ color: "white" }}
         >
-          {selectedcategory}{" "}
-          <span
-            style={{
-              color: "#F31503",
-            }}
-          >
-            Videos
-          </span>
+          {selectedCategory} <span style={{ color: "#F31503" }}>items</span>{" "}
+          {/* Text changed to 'items' to reflect mixed content */}
         </Typography>
-        <Video videos={videos}></Video>
+        {/* Pass all fetched items to the Video component */}
+        {/* The Video component should be updated to handle different item types (video, channel, playlist) */}
+        <Video items={items} />
       </Box>
     </Stack>
   );

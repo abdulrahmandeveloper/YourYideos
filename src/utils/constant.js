@@ -42,3 +42,5 @@ export const demoVideoTitle =
   "Build and Deploy 5 JavaScript & React API Projects in 10 Hours - Full Course | RapidAPI";
 export const demoProfilePicture =
   "http://dergipark.org.tr/assets/app/images/buddy_sample.png";
+export const demoPlaylistUrl = "/playlist/PL-Vj9GgY2g03J-ZgQ20tN4eL8D0T4E4"; // Example fallback URL, replace with a real one or keep simple
+export const demoPlaylistTitle = "Sample Playlist Title"; // Example fallback title
