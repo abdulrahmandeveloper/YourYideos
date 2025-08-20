@@ -1,5 +1,4 @@
 // src/components/PlaylistCard.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
@@ -8,7 +7,7 @@ import {
   demoPlaylistTitle,
   demoChannelUrl,
   demoChannelTitle,
-} from "../utils/constant"; // Make sure these are defined in your constants
+} from "../../utils/constant"; // Make sure these are defined in your constants
 
 const PlaylistCard = ({ playlist }) => {
   const playlistId = playlist?.id?.playlistId;

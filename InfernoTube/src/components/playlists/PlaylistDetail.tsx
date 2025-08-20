@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI";
+import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import PlaylistItemList from "./PlaylistItemList"; // Import the new component
 
 const PlaylistDetail = () => {

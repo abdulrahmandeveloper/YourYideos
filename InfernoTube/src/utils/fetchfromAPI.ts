@@ -10,7 +10,7 @@ const API_HEADERS = {
   "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
 };
 
-export const FetchFromAPI = async (endpoint, queryParams = {}) => {
+export const FetchFromAPI = async (endpoint: string, queryParams = {}) => {
   try {
     const requestOptions = {
       method: "GET",
@@ -19,10 +19,7 @@ export const FetchFromAPI = async (endpoint, queryParams = {}) => {
       headers: API_HEADERS,
     };
     const response = await axios.request(requestOptions);
-    console.log(
-      `WorkspaceFromAPI - Success for endpoint: ${endpoint} with params:`,
-      queryParams
-    );
+
     return response.data;
   } catch (error) {
     console.error(

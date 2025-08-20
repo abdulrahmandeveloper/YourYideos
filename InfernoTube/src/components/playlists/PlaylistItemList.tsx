@@ -1,8 +1,8 @@
 // src/components/PlaylistItemList.jsx
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI";
-import VideoCard from "./VideoCard"; // Assuming you have a VideoCard component for individual videos
+import { FetchFromAPI } from "../../utils/fetchfromAPI";
+import VideoCard from "../videos/VideoCard"; // Assuming you have a VideoCard component for individual videos
 
 const PlaylistItemList = ({ playlistId }) => {
   const [playlistVideos, setPlaylistVideos] = useState([]);

@@ -1,12 +1,13 @@
 // src/components/CaptionList.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import { FetchFromAPI } from "../utils/fetchfromAPI"; // Adjust path if needed
 
-const CaptionList = ({ videoId }) => {
+const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
+  //const captionState = []:ISidebar
   const [captionTracks, setCaptionTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(String || null);
 
   useEffect(() => {
     if (!videoId) {
@@ -15,12 +16,12 @@ const CaptionList = ({ videoId }) => {
     }
 
     setLoading(true);
-    setError(null);
+    //setError(null);
 
     FetchFromAPI("captions", {
-      // Endpoint: 'captions'
-      part: "snippet", // Part: 'snippet'
-      videoId: videoId, // Dynamic videoId from prop
+      Endpoint: "captions",
+      part: "snippet",
+      videoId: videoId,
     })
       .then((data) => {
         setCaptionTracks(data?.items || []); // API returns an 'items' array

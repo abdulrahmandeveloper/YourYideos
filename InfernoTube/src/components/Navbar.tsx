@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import { Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { logo } from "../utils/constant";
-import Searchbar from "./Searchbar";
+import Searchbar from "./searchs/Searchbar";
 
 const Navbar = () => {
   return (

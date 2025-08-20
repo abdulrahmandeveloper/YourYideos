@@ -5,9 +5,9 @@ import ReactPlayer from "react-player";
 import { Typography, Stack, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import Video from "./Video";
-import CaptionList from "./CaptionList";
-import CommentList from "./CommentList"; // Import CommentList
-import { FetchFromAPI } from "../utils/fetchfromAPI";
+import CaptionList from "../CaptionList";
+import CommentList from "../CommentList"; // Import CommentList
+import { FetchFromAPI } from "../../utils/fetchfromAPI";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
@@ -15,14 +15,12 @@ const VideoDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch video details
     FetchFromAPI("videos", { part: "snippet,statistics", id: id })
       .then((data) => {
         setVideoDetail(data.items[0]);
       })
       .catch((error) => console.error("Error fetching video details:", error));
 
-    // Fetch related videos
     FetchFromAPI("search", {
       part: "snippet",
       relatedToVideoId: id,
@@ -57,7 +55,7 @@ const VideoDetail = () => {
             }}
           >
             <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${id}`} // Ensure this URL is correct, usually `https://www.youtube.com/watch?v=${id}`
+              url={`https://www.youtube.com/watch?v=${id}`}
               className="react-player"
               controls
             />

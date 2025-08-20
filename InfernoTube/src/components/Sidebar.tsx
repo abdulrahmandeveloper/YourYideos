@@ -1,8 +1,12 @@
 import { Stack } from "@mui/material";
 import { categories } from "../utils/constant";
+import { ICategories } from "../utils/constant";
 
-// Fix: Change 'selectedcategory' to 'selectedCategory' and 'setSelectedcategory' to 'setSelectedCategory'
-const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
+interface ISidebar {
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
+}
+const Sidebar = ({ selectedCategory, setSelectedCategory }: ISidebar) => {
   return (
     <Stack
       direction={"row"}
@@ -12,19 +16,19 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
         flexDirection: { md: "column" },
       }}
     >
-      {categories.map((category) => (
+      {categories.map((category: ICategories) => (
         <button
-          onClick={() => setSelectedCategory(category.name)} // Fix: Use 'setSelectedCategory'
+          onClick={() => setSelectedCategory(category.name)}
           className="category-btn"
           style={{
-            background: category.name === selectedCategory && "#FC1503", // Fix: Use 'selectedCategory'
+            background: category.name === selectedCategory ? "#FC1503" : "",
             color: "white",
           }}
           key={category.name}
         >
           <span
             style={{
-              color: category.name === selectedCategory ? "white" : "red", // Fix: Use 'selectedCategory'
+              color: category.name === selectedCategory ? "white" : "red",
               marginRight: "15px",
             }}
           >
@@ -32,9 +36,9 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }) => {
           </span>
           <span
             style={{
-              opacity: category.name === selectedCategory ? "1" : "0.8", // Fix: Use 'selectedCategory'
+              opacity: category.name === selectedCategory ? "1" : "0.8",
               fontSize: "20px",
-              //  font: "semi-bold",
+              font: "semi-bold",
             }}
           >
             {category.name}

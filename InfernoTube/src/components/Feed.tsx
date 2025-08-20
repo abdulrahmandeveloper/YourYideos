@@ -2,35 +2,30 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
-import Video from "./Video"; // This component now handles videos, channels, and playlists
+import Video from "./videos/Video";
 import { FetchFromAPI } from "../utils/fetchfromAPI";
 
 const Feed = () => {
-  const [selectedCategory, setSelectedCategory] = useState("New");
-  const [items, setItems] = useState([]); // Renamed 'videos' to 'items' to hold mixed types
+  const [selectedCategory, setSelectedCategory] = useState(String || null);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // console.log("Videos in state (outside useEffect):", videos); // Keep for debugging if needed
-
     const fetchItems = async () => {
       try {
         const data = await FetchFromAPI("search", {
           part: "snippet",
           q: selectedCategory,
-          // *** Crucial change: search for all types ***
-          type: "video,channel,playlist", // <-- Include 'playlist' here
-          maxResults: "50", // Keep a reasonable limit to manage API quota
+          type: "video,channel,playlist",
+          maxResults: "50",
         });
-        setItems(data.items); // Set all fetched items (videos, channels, playlists)
+        setItems(data.items);
       } catch (error) {
         console.error("Failed to fetch items:", error);
-        // You might want to set an error state here to display a user-friendly message
-        // setError('Failed to load content. Please try again later.');
       }
     };
 
     fetchItems();
-  }, [selectedCategory]); // Dependency array: re-run useEffect when selectedCategory changes
+  }, [selectedCategory]);
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
@@ -43,8 +38,6 @@ const Feed = () => {
       >
         <Sidebar
           selectedCategory={selectedCategory}
-          // This prop name 'setSelectedCategory' MUST EXACTLY MATCH
-          // how it's destructured and used in the Sidebar component.
           setSelectedCategory={setSelectedCategory}
         />
         <Typography
@@ -63,10 +56,8 @@ const Feed = () => {
           sx={{ color: "white" }}
         >
           {selectedCategory} <span style={{ color: "#F31503" }}>items</span>{" "}
-          {/* Text changed to 'items' to reflect mixed content */}
         </Typography>
-        {/* Pass all fetched items to the Video component */}
-        {/* The Video component should be updated to handle different item types (video, channel, playlist) */}
+
         <Video items={items} />
       </Box>
     </Stack>
