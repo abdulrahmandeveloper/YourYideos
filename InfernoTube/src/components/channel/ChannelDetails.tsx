@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import ChannelCard from "./ChannelCard";
 import Video from "../videos/Video";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
+import Loading from "../Loading";
 
 const ChannelDetails = () => {
   const { id } = useParams();
@@ -31,7 +32,8 @@ const ChannelDetails = () => {
   }, [id]);
 
   // Handle loading state
-  if (!channelDetail || !videos) return "Loading..."; // You can use a spinner here
+  if (!channelDetail || !videos)
+    return <Loading message="Loading..."></Loading>; // You can use a spinner here
 
   return (
     <Box minHeight={"95vh"}>

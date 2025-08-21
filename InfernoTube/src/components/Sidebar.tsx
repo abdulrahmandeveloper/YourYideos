@@ -3,9 +3,10 @@ import { categories } from "../utils/constant";
 import { ICategories } from "../utils/constant";
 
 interface ISidebar {
-  selectedCategory: string;
+  selectedCategory: string | null;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string | null>>;
 }
+
 const Sidebar = ({ selectedCategory, setSelectedCategory }: ISidebar) => {
   return (
     <Stack
@@ -32,7 +33,7 @@ const Sidebar = ({ selectedCategory, setSelectedCategory }: ISidebar) => {
               marginRight: "15px",
             }}
           >
-            {category.icon}
+            {<category.icon />}
           </span>
           <span
             style={{

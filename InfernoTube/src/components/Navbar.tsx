@@ -8,7 +8,7 @@ const Navbar = () => {
     <Stack
       direction={"row"}
       alignItems={"center"}
-      p={2}
+      className="mx-2 py-2 bg-black"
       sx={{
         position: "sticky",
         background: "#000",
@@ -16,8 +16,11 @@ const Navbar = () => {
         justifyContent: "space-between",
       }}
     >
-      <Link to={"/"} style={{ display: "flex", alignItems: "center" }}>
-        <img src={logo} alt="" height={45} />
+      <Link to={"/"} className="justify-center items-center">
+        <img
+          src={logo}
+          className="h-[60px] w-[60px] justify-center items-center "
+        ></img>
       </Link>
       <Searchbar />
     </Stack>

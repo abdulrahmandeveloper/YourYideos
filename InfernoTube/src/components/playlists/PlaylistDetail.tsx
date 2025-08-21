@@ -1,15 +1,15 @@
 // src/components/PlaylistDetail.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
-import PlaylistItemList from "./PlaylistItemList"; // Import the new component
+import PlaylistItemList from "./PlaylistItemList";
 
 const PlaylistDetail = () => {
-  const { id } = useParams(); // 'id' will be the playlistId from the URL
+  const { id } = useParams();
   const [playlistDetail, setPlaylistDetail] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) {
@@ -20,9 +20,8 @@ const PlaylistDetail = () => {
     setLoading(true);
     setError(null);
 
-    // Fetch details about the playlist itself
     FetchFromAPI("playlists", {
-      part: "snippet,status", // 'status' part might be useful for public/private info
+      part: "snippet,status",
       id: id,
     })
       .then((data) => {

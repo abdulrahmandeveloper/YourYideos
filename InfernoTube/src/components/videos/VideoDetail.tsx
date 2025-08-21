@@ -8,6 +8,7 @@ import Video from "./Video";
 import CaptionList from "../CaptionList";
 import CommentList from "../CommentList"; // Import CommentList
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
+import Loading from "../Loading";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
@@ -31,7 +32,7 @@ const VideoDetail = () => {
       .catch((error) => console.error("Error fetching related videos:", error));
   }, [id]);
 
-  if (!videoDetail || !videos) return "Loading...";
+  if (!videoDetail || !videos) return <Loading message="Loading..."></Loading>;
 
   const {
     snippet: { title, channelId, channelTitle },

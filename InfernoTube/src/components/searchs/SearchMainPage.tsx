@@ -3,8 +3,9 @@ import { Box, Typography } from "@mui/material";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import Video from "../videos/Video";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading";
 
-const SearchFeed = () => {
+const SearchMainPage = () => {
   const [videos, setVideos] = useState([]);
   const { searchTerm } = useParams();
 
@@ -19,8 +20,7 @@ const SearchFeed = () => {
       .catch((error) => console.error("Error fetching search results:", error)); // Added error handling
   }, [searchTerm]);
 
-  // Optional: Add a loading state
-  if (!videos.length) return "Loading...";
+  if (!videos.length) return <Loading message="Loading..."></Loading>;
 
   return (
     <Box
@@ -55,4 +55,4 @@ const SearchFeed = () => {
   );
 };
 
-export default SearchFeed;
+export default SearchMainPage;

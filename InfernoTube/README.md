@@ -7,7 +7,7 @@ Love this prompt. Here’s a tight, product-thinking list of **high-leverage fea
 ## 1) Viewer control & discovery
 
 - **Algorithm dials** _(Explore vs. Familiar vs. Local vs. Short-form sliders)_
-  **Why:** Users feel “trapped” by opaque feeds.
+  **Why:** Users feel “trapped” by opaque MainPages.
   **V1:** Per-user weights stored in profile; surface toggles on Home; show “why am I seeing this?” with simple signals.
 
 - **Semantic search inside videos** _(search words/concepts across transcripts, jump to the exact moment)_
@@ -127,7 +127,7 @@ Love this prompt. Here’s a tight, product-thinking list of **high-leverage fea
 
 ## What to **not** copy from YouTube
 
-- Over-opaque recommendation loops → replace with **transparent, controllable** feed.
+- Over-opaque recommendation loops → replace with **transparent, controllable** MainPage.
 - Flat comments → ship **threaded, timestamped, ranked** discussion.
 - One-dimensional monetization → ship **modular** revenue options from day one.
 - “Video only” mindset → treat it as a **knowledge object** (video + transcript + notes + quiz + references).
