@@ -4,20 +4,21 @@ import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import Video from "../videos/Video";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
+import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
 const SearchMainPage = () => {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<IvideoItem[]>([]);
   const { searchTerm } = useParams();
 
+  console.log("searchmain page log: ", searchTerm);
   useEffect(() => {
     FetchFromAPI("search", {
-      // Correct endpoint as first argument
       part: "snippet",
       q: searchTerm,
-      maxResults: "50", // Added maxResults for better API usage control
+      maxResults: "50",
     })
       .then((data) => setVideos(data.items))
-      .catch((error) => console.error("Error fetching search results:", error)); // Added error handling
+      .catch((error) => console.error("Error fetching search results:", error));
   }, [searchTerm]);
 
   if (!videos.length) return <Loading message="Loading..."></Loading>;
@@ -39,7 +40,7 @@ const SearchMainPage = () => {
           color: "white",
         }}
       >
-        Search results for: {/* Added a space here for better readability */}
+        Search results for: {}
         <span
           style={{
             color: "#F31503",
@@ -47,10 +48,9 @@ const SearchMainPage = () => {
         >
           {searchTerm}
         </span>{" "}
-        {/* Added a space here for better readability */}
         Videos
       </Typography>
-      <Video videos={videos}></Video>
+      <Video items={videos} direction="row"></Video>
     </Box>
   );
 };

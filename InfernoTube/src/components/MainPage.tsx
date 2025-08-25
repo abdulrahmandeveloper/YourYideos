@@ -10,7 +10,7 @@ const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     "New"
   );
-  const [items, setItems] = useState<IvideoItem>(String);
+  const [items, setItems] = useState<IvideoItem[]>([]);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -21,7 +21,7 @@ const MainPage = () => {
           type: "video,channel,playlist",
           maxResults: "50",
         });
-        console.log(data);
+        console.log("main page data:", data);
 
         setItems(data.items);
       } catch (error) {
@@ -65,7 +65,7 @@ const MainPage = () => {
           {selectedCategory} <span style={{ color: "#F31503" }}>Videos</span>{" "}
         </Typography>
 
-        <Video items={items} />
+        <Video items={items} direction="row" />
       </Box>
     </Stack>
   );

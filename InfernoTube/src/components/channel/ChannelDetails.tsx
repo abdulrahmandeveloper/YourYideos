@@ -1,4 +1,3 @@
-// ChannelDetails.jsx
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -6,34 +5,32 @@ import ChannelCard from "./ChannelCard";
 import Video from "../videos/Video";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import Loading from "../Loading";
+import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
 const ChannelDetails = () => {
   const { id } = useParams();
   const [channelDetail, setChannelDetail] = useState(null);
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<IvideoItem[]>([]);
 
   useEffect(() => {
-    // --- FIX 1: For fetching channel details ---
-    FetchFromAPI("channels", { part: "snippet,statistics", id: id }) // Correct endpoint and params
+    FetchFromAPI("channels", { part: "snippet,statistics", id: id })
       .then((data) => setChannelDetail(data?.items[0]))
       .catch((error) =>
         console.error("Error fetching channel details:", error)
       );
 
-    // --- FIX 2: For fetching channel's videos ---
     FetchFromAPI("search", {
       channelId: id,
       part: "snippet",
       order: "date",
-      maxResults: "50", // It's good practice to include maxResults
+      maxResults: "50",
     })
-      .then((data) => setVideos(data?.items)) // Corrected data?.item to data?.items
+      .then((data) => setVideos(data?.items))
       .catch((error) => console.error("Error fetching channel videos:", error));
   }, [id]);
 
-  // Handle loading state
   if (!channelDetail || !videos)
-    return <Loading message="Loading..."></Loading>; // You can use a spinner here
+    return <Loading message="Loading..."></Loading>;
 
   return (
     <Box minHeight={"95vh"}>
@@ -48,7 +45,7 @@ const ChannelDetails = () => {
         ></div>
         <ChannelCard
           channelDetail={channelDetail}
-          marginTop="-120px" // Often needs adjustment for overlap with banner
+          marginTop="-120px"
         ></ChannelCard>
       </Box>
       <Box
@@ -58,11 +55,8 @@ const ChannelDetails = () => {
         alignItems={"center"}
       >
         {" "}
-        {/* Added centering for videos */}
         <Box sx={{ mr: { sm: "100px" } }} />{" "}
-        {/* This margin box might not be needed if videos are centered */}
-        <Video videos={videos} />{" "}
-        {/* Removed direction if it's not a flex container here */}
+        <Video items={videos} direction="row" />{" "}
       </Box>
     </Box>
   );

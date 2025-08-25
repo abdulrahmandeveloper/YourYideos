@@ -1,23 +1,25 @@
-// src/components/PlaylistCard.jsx
 import { Link } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
+import { dataSnippet } from "../../interfaces/VideoItems.interface";
 
-const PlaylistCard = ({ playlist }) => {
-  const playlistId = playlist?.id?.playlistId;
-  const snippet = playlist?.snippet;
-
+interface IPlaylistCard {
+  playlistId: string;
+  snippet: dataSnippet;
+}
+const PlaylistCard = ({ playlistId, snippet }: IPlaylistCard) => {
   return (
     <Card
       sx={{
         width: { xs: "100%", sm: "358px", md: "320px" },
         boxShadow: "none",
         borderRadius: "0",
-        backgroundColor: "#000", // Dark background to match theme
+        backgroundColor: "#000",
       }}
     >
       <Link to={playlistId ? `/playlist/${playlistId}` : "/"}>
         <CardMedia
+          component={"img"}
           image={snippet?.thumbnails?.high?.url}
           alt={snippet?.title}
           sx={{ width: { xs: "100%", sm: "358px", md: "320px" }, height: 180 }}

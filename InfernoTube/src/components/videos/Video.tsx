@@ -3,10 +3,19 @@ import VideoCard from "./VideoCard";
 import ChannelCard from "../channel/ChannelCard";
 import PlaylistCard from "../playlists/PlaylistCard";
 import Loading from "../Loading";
+import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
-const Videos = ({ items, direction }) => {
+export interface IVideos {
+  items: IvideoItem[];
+  direction: "row" | "row-reverse" | "column" | "column-reverse";
+}
+
+const Videos = ({ items, direction }: IVideos) => {
   if (!items?.length) return <Loading message="Loading..."></Loading>;
 
+  if (!direction) {
+    console.log("direction: ", direction);
+  }
   return (
     <Stack
       direction={direction || "row"}
@@ -17,8 +26,13 @@ const Videos = ({ items, direction }) => {
       {items.map((item, idx) => (
         <Box key={idx}>
           {item.id.videoId && <VideoCard video={item} />}
-          {item.id.channelId && <ChannelCard channelDetail={item} />}
-          {item.id.playlistId && <PlaylistCard playlist={item} />}{" "}
+          {item.snippet.channelId && <ChannelCard channelDetail={item} />}
+          {item.id?.playlistId && (
+            <PlaylistCard
+              playlistId={item.id.playlistId}
+              snippet={item.snippet}
+            />
+          )}{" "}
         </Box>
       ))}
     </Stack>

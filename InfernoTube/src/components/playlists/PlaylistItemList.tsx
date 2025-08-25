@@ -1,13 +1,13 @@
 // src/components/PlaylistItemList.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
-import VideoCard from "../videos/VideoCard"; // Assuming you have a VideoCard component for individual videos
+import VideoCard from "../videos/VideoCard";
 
 const PlaylistItemList = ({ playlistId }) => {
   const [playlistVideos, setPlaylistVideos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!playlistId) {
@@ -18,14 +18,12 @@ const PlaylistItemList = ({ playlistId }) => {
     setLoading(true);
     setError(null);
 
-    // Fetch the videos within the playlist
     FetchFromAPI("playlistItems", {
       part: "snippet",
       playlistId: playlistId,
-      maxResults: "50", // Adjust as needed
+      maxResults: "50",
     })
       .then((data) => {
-        // The API returns videos in playlistItems.items
         setPlaylistVideos(data?.items || []);
         setLoading(false);
       })
@@ -36,7 +34,7 @@ const PlaylistItemList = ({ playlistId }) => {
         );
         setLoading(false);
       });
-  }, [playlistId]); // Re-fetch when playlistId changes
+  }, [playlistId]);
 
   if (loading) {
     return (
@@ -62,7 +60,6 @@ const PlaylistItemList = ({ playlistId }) => {
     );
   }
 
-  // Reuse your existing VideoCard component or adapt if you have a different structure
   return (
     <Box sx={{ mt: 3, p: 2, background: "#1e1e1e", borderRadius: "8px" }}>
       <Typography variant="h6" fontWeight="bold" mb={2} color="#fff">
@@ -70,8 +67,6 @@ const PlaylistItemList = ({ playlistId }) => {
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         {playlistVideos.map((item) => (
-          // Make sure to pass the correct video ID and other details to your VideoCard
-          // For playlist items, the video ID is typically at item.snippet.resourceId.videoId
           <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
             <VideoCard video={item} />
           </Grid>

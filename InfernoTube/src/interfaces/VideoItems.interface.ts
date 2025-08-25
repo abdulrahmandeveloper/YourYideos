@@ -37,31 +37,37 @@ export interface IvideoItem {
   id: {
     kind: string;
     videoId: string;
+    playlistId: string;
   };
-  snippet: {
-    publishedAt: string;
-    channelId: string;
-    title: string;
-    description: string;
-    thumbnails: {
-      default: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      medium: {
-        url: string;
-        width: number;
-        height: number;
-      };
-      high: {
-        url: string;
-        width: number;
-        height: number;
-      };
+  snippet: dataSnippet;
+  statistics: {
+    subscriberCount: string;
+  };
+}
+
+export interface dataSnippet {
+  publishedAt: string;
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnails: {
+    default: {
+      url: string;
+      width: number;
+      height: number;
     };
-    channelTitle: string;
-    liveBroadcastContent: string;
-    publishedTime: string;
+    medium: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    high: {
+      url: string;
+      width: number;
+      height: number;
+    };
   };
+  channelTitle: string;
+  liveBroadcastContent: string;
+  publishedTime: string;
 }

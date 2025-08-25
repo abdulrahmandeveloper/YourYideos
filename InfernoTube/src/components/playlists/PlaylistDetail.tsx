@@ -1,13 +1,13 @@
-// src/components/PlaylistDetail.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import PlaylistItemList from "./PlaylistItemList";
+import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
 const PlaylistDetail = () => {
   const { id } = useParams();
-  const [playlistDetail, setPlaylistDetail] = useState(null);
+  const [playlistDetail, setPlaylistDetail] = useState<IvideoItem>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +35,7 @@ const PlaylistDetail = () => {
         );
         setLoading(false);
       });
-  }, [id]); // Re-fetch when playlistId changes
+  }, [id]);
 
   if (loading) {
     return (
@@ -65,7 +65,6 @@ const PlaylistDetail = () => {
 
   return (
     <Box minHeight="95vh" sx={{ p: 2 }}>
-      {/* Playlist Banner/Header */}
       <Box
         sx={{
           background:
@@ -92,7 +91,6 @@ const PlaylistDetail = () => {
         </Typography>
       </Box>
 
-      {/* Playlist Videos */}
       <PlaylistItemList playlistId={id} />
     </Box>
   );

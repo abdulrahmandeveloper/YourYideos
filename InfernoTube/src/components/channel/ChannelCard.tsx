@@ -3,12 +3,13 @@ import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../../utils/constant";
+import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
 const ChannelCard = ({
   channelDetail,
   marginTop,
 }: {
-  channelDetail: [];
+  channelDetail: IvideoItem;
   marginTop: string;
 }) => (
   <Box
@@ -19,12 +20,12 @@ const ChannelCard = ({
       justifyContent: "center",
       alignItems: "center",
       width: { xs: "356px", md: "320px" },
-      height: "326px", // Maintain height for consistent card size
+      height: "326px",
       margin: "auto",
-      marginTop: marginTop, // This will be the negative margin from ChannelDetails
+      marginTop: marginTop,
     }}
   >
-    <Link to={`/channel/${channelDetail?.id?.channelId}`}>
+    <Link to={`/channel/${channelDetail?.snippet?.channelId}`}>
       <CardContent
         sx={{
           display: "flex",
@@ -34,8 +35,8 @@ const ChannelCard = ({
           color: "#fff",
         }}
       >
-        {/* CardMedia for the channel's profile picture */}
         <CardMedia
+          component={"img"}
           image={
             channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture
           }
@@ -48,8 +49,6 @@ const ChannelCard = ({
             border: "1px solid #e3e3e3",
           }}
         />{" "}
-        {/* This is a self-closing tag */}
-        {/* Typography for channel title (moved OUTSIDE CardMedia) */}
         <Typography variant="h6">
           {channelDetail?.snippet?.title}
           <CheckCircle
@@ -60,7 +59,6 @@ const ChannelCard = ({
             }}
           />
         </Typography>
-        {/* Typography for subscriber count (moved OUTSIDE CardMedia) */}
         {channelDetail?.statistics?.subscriberCount && (
           <Typography>
             {parseInt(
