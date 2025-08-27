@@ -1,4 +1,3 @@
-// src/components/VideoDetail.jsx (Updated to include CommentList)
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
@@ -6,7 +5,7 @@ import { Typography, Stack, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import Video from "./Video";
 import CaptionList from "../CaptionList";
-import CommentList from "../CommentList"; // Import CommentList
+import CommentList from "../CommentList";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import Loading from "../Loading";
 
@@ -74,7 +73,9 @@ const VideoDetail = () => {
             >
               <Link to={`/channel/${channelId}`}>
                 <Typography
-                  variant={{ sm: "subtitle-1", md: "h6" }}
+                  sx={{
+                    typography: { sm: "subtitle-1", md: "h6" },
+                  }}
                   color="#fff"
                 >
                   {channelTitle}
@@ -106,10 +107,9 @@ const VideoDetail = () => {
                 </Typography>
               </Stack>
             </Stack>
-            {/* Display Captions (if applicable) and Comments */}
             <Box px={2} py={2} sx={{ color: "#fff" }}>
               <CaptionList videoId={id} />
-              <CommentList videoId={id} /> {/* Add CommentList here */}
+              <CommentList videoId={id} />
             </Box>
           </Box>
         </Box>
@@ -119,7 +119,7 @@ const VideoDetail = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Video videos={videos} direction={"column"}></Video>
+          <Video items={videos} direction={"column"}></Video>
         </Box>{" "}
       </Stack>
     </Box>

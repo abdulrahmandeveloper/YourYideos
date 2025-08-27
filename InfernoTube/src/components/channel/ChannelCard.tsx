@@ -2,7 +2,6 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { demoProfilePicture } from "../../utils/constant";
 import { IvideoItem } from "../../interfaces/VideoItems.interface";
 
 const ChannelCard = ({
@@ -10,7 +9,7 @@ const ChannelCard = ({
   marginTop,
 }: {
   channelDetail: IvideoItem;
-  marginTop: string;
+  marginTop?: string;
 }) => (
   <Box
     sx={{
@@ -37,9 +36,7 @@ const ChannelCard = ({
       >
         <CardMedia
           component={"img"}
-          image={
-            channelDetail?.snippet?.thumbnails?.high?.url || demoProfilePicture
-          }
+          image={channelDetail?.snippet?.thumbnails?.high?.url}
           alt={channelDetail?.snippet?.title}
           sx={{
             borderRadius: "50%",

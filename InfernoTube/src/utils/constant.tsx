@@ -39,13 +39,36 @@ export const categories: ICategories[] = [
   { name: "Crypto", icon: DeveloperModeIcon },
 ];
 
-//export const demoThumbnailUrl = "https://i.ibb.co/G2L2Gwp/API-Course.png";
-export const demoChannelUrl = "/channel/UCmXmlB4-HJytD7wek0Uo97A";
-export const demoVideoUrl = "/video/GDa8kZLNhJ4";
-export const demoChannelTitle = "JavaScript Mastery";
-export const demoVideoTitle =
-  "Build and Deploy 5 JavaScript & React API Projects in 10 Hours - Full Course | RapidAPI";
-export const demoProfilePicture =
-  "http://dergipark.org.tr/assets/app/images/buddy_sample.png";
-export const demoPlaylistUrl = "/playlist/PL-Vj9GgY2g03J-ZgQ20tN4eL8D0T4E4"; // Example fallback URL, replace with a real one or keep simple
-export const demoPlaylistTitle = "Sample Playlist Title"; // Example fallback title
+interface IIncludedAPI {
+  name: string;
+  baseURL: string;
+  endpoints: string[];
+}
+
+export const includedAPI: IIncludedAPI[] = [
+  {
+    name: "Google Youtube API",
+    baseURL: "https://www.googleapis.com/youtube/v3/",
+    endpoints: [
+      "/search",
+      "/videos",
+      "/channels",
+      "/playlistItems",
+      "/playlists",
+      "/subscriptions",
+    ],
+  },
+  {
+    name: "Rapid API - youtube v3",
+    baseURL: "https://youtube-v31.p.rapidapi.com",
+    endpoints: [],
+  },
+];
+
+//global API hheaders declaration
+const API_KEY = import.meta.env.VITE_REACT_APP_RAPID_API_KEY;
+
+export const header = {
+  "x-rapidapi-key": API_KEY,
+  "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
+};

@@ -1,10 +1,10 @@
-// src/components/MainPage.jsx
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Video from "./videos/Video";
 import { FetchFromAPI } from "../utils/fetchfromAPI";
 import { IvideoItem } from "../interfaces/VideoItems.interface";
+import Right_sidebar from "./right-sidebar/Right-sidebar";
 
 const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
@@ -15,7 +15,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const data = await FetchFromAPI("search", {
+        const data = await FetchFromAPI("google", "search", {
           part: "snippet",
           q: selectedCategory,
           type: "video,channel,playlist",
@@ -66,6 +66,9 @@ const MainPage = () => {
         </Typography>
 
         <Video items={items} direction="row" />
+      </Box>
+      <Box>
+        <Right_sidebar></Right_sidebar>
       </Box>
     </Stack>
   );

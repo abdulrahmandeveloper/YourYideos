@@ -1,12 +1,11 @@
-// src/components/CommentList.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Typography, Avatar, Stack, Paper } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI"; // Adjust path if needed
+import { FetchFromAPI } from "../utils/fetchfromAPI";
 
 const CommentList = ({ videoId }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!videoId) {
@@ -17,15 +16,12 @@ const CommentList = ({ videoId }) => {
     setLoading(true);
     setError(null);
 
-    // Endpoint for comment threads
     FetchFromAPI("commentThreads", {
       part: "snippet",
       videoId: videoId,
-      maxResults: "20", // Reduced for better quota management, adjust as needed
+      maxResults: "20",
     })
       .then((data) => {
-        // Comments are nested: data.items[i].snippet.topLevelComment.snippet
-        // We want the top-level comments for display
         setComments(data?.items || []);
         setLoading(false);
       })
@@ -34,8 +30,7 @@ const CommentList = ({ videoId }) => {
         setError("Failed to load comments. Check your API key and quota.");
         setLoading(false);
       });
-  }, [videoId]); // Re-fetch when videoId changes
-
+  }, [videoId]);
   if (loading) {
     return (
       <Typography color="gray" sx={{ mt: 2 }}>
@@ -59,6 +54,8 @@ const CommentList = ({ videoId }) => {
       </Typography>
     );
   }
+
+  console.log(comments);
 
   return (
     <Box sx={{ mt: 3, p: 2, backgroundColor: "#1e1e1e", borderRadius: "8px" }}>

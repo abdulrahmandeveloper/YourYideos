@@ -1,13 +1,11 @@
-// src/components/CaptionList.jsx
 import { useState, useEffect } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI"; // Adjust path if needed
+import { FetchFromAPI } from "../utils/fetchfromAPI";
 
 const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
-  //const captionState = []:ISidebar
   const [captionTracks, setCaptionTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(String || null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!videoId) {
@@ -16,7 +14,7 @@ const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
     }
 
     setLoading(true);
-    //setError(null);
+    setError(null);
 
     FetchFromAPI("captions", {
       Endpoint: "captions",
@@ -24,7 +22,7 @@ const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
       videoId: videoId,
     })
       .then((data) => {
-        setCaptionTracks(data?.items || []); // API returns an 'items' array
+        setCaptionTracks(data?.items || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -34,7 +32,7 @@ const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
         );
         setLoading(false);
       });
-  }, [videoId]); // Re-fetch when videoId changes
+  }, [videoId]);
 
   if (loading) {
     return <Typography color="gray">Loading captions...</Typography>;

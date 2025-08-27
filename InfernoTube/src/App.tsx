@@ -5,7 +5,7 @@ import MainPage from "./components/MainPage";
 import VideoDetail from "./components/videos/VideoDetail";
 import ChannelDetails from "./components/channel/ChannelDetails";
 import SearchMainPage from "./components/searchs/SearchMainPage";
-import PlaylistDetail from "./components/playlists/PlaylistDetail"; // Import the new component
+import PlaylistDetail from "./components/playlists/PlaylistDetail";
 
 const App = () => (
   <BrowserRouter>
@@ -17,7 +17,6 @@ const App = () => (
         <Route path="/channel/:id" element={<ChannelDetails />} />
         <Route path="/search/:searchTerm" element={<SearchMainPage />} />
         <Route path="/playlist/:id" element={<PlaylistDetail />} />{" "}
-        {/* NEW ROUTE HERE */}
       </Routes>
     </Box>
   </BrowserRouter>

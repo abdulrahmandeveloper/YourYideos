@@ -1,25 +1,15 @@
-import axios from "axios";
+import { FetchDataFromAPI } from "./manageAPI";
 
-const API_KEY = import.meta.env.VITE_REACT_APP_RAPID_API_KEY;
-const BASE_URL = "https://youtube-v31.p.rapidapi.com";
+export const FetchFromAPI = async (
+  api: string,
+  endpoint: string,
+  queryParams = {}
+) => {
+  const fetchData = new FetchDataFromAPI();
 
-const API_HEADERS = {
-  "x-rapidapi-key": API_KEY,
-  "x-rapidapi-host": "youtube-v31.p.rapidapi.com",
-};
-
-export const FetchFromAPI = async (endpoint: string, queryParams = {}) => {
   try {
-    const requestOptions = {
-      method: "GET",
-      url: `${BASE_URL}/${endpoint}`,
-      params: { ...queryParams },
-      headers: API_HEADERS,
-    };
-    const response = await axios.request(requestOptions);
-
-    return response.data;
-  } catch (error: any) {
+    fetchData.fetchFromAPI(api, endpoint, queryParams);
+  } catch (error: unknown) {
     console.log(error);
   }
 };
