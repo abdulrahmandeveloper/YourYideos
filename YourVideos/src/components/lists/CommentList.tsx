@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, Avatar, Stack, Paper } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI";
+import { FetchFromAPI } from "../../utils/fetchfromAPI";
 
 const CommentList = ({ videoId }) => {
   const [comments, setComments] = useState([]);

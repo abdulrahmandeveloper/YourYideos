@@ -4,8 +4,8 @@ import ReactPlayer from "react-player";
 import { Typography, Stack, Box } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import Video from "./Video";
-import CaptionList from "../CaptionList";
-import CommentList from "../CommentList";
+import CaptionList from "../lists/CaptionList";
+import CommentList from "../lists/CommentList";
 import { FetchFromAPI } from "../../utils/fetchfromAPI";
 import Loading from "../Loading";
 

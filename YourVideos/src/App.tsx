@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
-import Navbar from "./components/Navbar";
-import MainPage from "./components/MainPage";
+import Navbar from "./sections/Navbar";
+import MainPage from "./sections/MainPage";
 import VideoDetail from "./components/videos/VideoDetail";
 import ChannelDetails from "./components/channel/ChannelDetails";
 import SearchMainPage from "./components/searchs/SearchMainPage";

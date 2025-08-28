@@ -4,7 +4,6 @@ import {
   ICreateRequest,
   IFiltredResponse,
   IRecievedResponse,
-  IResponse,
 } from "../interfaces/api.interface";
 
 const GOOGLE_BASE_URL = import.meta.env.VITE_GOOGLE_API_BASE_URL;
@@ -48,7 +47,7 @@ export class FetchDataFromAPI {
       };
       return { request: rapidApiRequestOptions, api: "rapid" };
     }
-    return { googleRequestOptions, api: "google" };
+    return { request: googleRequestOptions, api: "google" };
   }
 
   public async chooseAndRequestFromAPI(api = "google", request: any) {

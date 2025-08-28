@@ -7,9 +7,5 @@ export const FetchFromAPI = async (
 ) => {
   const fetchData = new FetchDataFromAPI();
 
-  try {
-    fetchData.fetchFromAPI(api, endpoint, queryParams);
-  } catch (error: unknown) {
-    console.log(error);
-  }
+  fetchData.fetchFromAPI(api, endpoint, queryParams);
 };

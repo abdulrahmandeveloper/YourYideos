@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
-import Video from "./videos/Video";
+import Video from "../components/videos/Video";
 import { FetchFromAPI } from "../utils/fetchfromAPI";
 import { IvideoItem } from "../interfaces/VideoItems.interface";
-import Right_sidebar from "./right-sidebar/Right-sidebar";
+import Right_sidebar from "./Right-sidebar";
 
 const MainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(

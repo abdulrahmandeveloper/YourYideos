@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
-import { FetchFromAPI } from "../utils/fetchfromAPI";
+import { FetchFromAPI } from "../../utils/fetchfromAPI";
 
 const CaptionList = ({ videoId }: { videoId: string | undefined }) => {
   const [captionTracks, setCaptionTracks] = useState([]);

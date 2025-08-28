@@ -13,7 +13,7 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 import { SvgIconComponent } from "@mui/icons-material";
 
-export const logo = "https://i.ibb.co/s9Qys2j/logo.png";
+export const logo = "../../public/images/play-logo-vector.jpg";
 
 export interface ICategories {
   name: string;
